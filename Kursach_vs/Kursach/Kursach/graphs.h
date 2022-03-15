@@ -7,28 +7,40 @@
 
 
 // заполнение поля выбранным цветом
-void defineTop(uc** img, int x, int y, vertex* v) {
+//img - в этой матрице представлена картинка\
+x - top\
+y - left\
+v - вершина
+void defineTop(uc** img, int x, int y, vertex* v) 
+{
     if (x > v->bottom) v->bottom = x;
     if (x < v->top) v->top = x;
     if (y > v->right) v->right = y;
     if (y < v->left) v->left = y;
 
+    //помечаем вершину и ставим цвет
     img[x][y] = v->color;
+
+    //если не была посещена и не является граничащей\
+    вверх
     if (x > 0 && img[x - 1][y] != v->color && img[x - 1][y] != 1) {
         defineTop(img, x - 1, y, v);
     }
+    //вниз
     if (x < H - 1 && img[x + 1][y] != v->color && img[x + 1][y] != 1) {
         defineTop(img, x + 1, y, v);
     }
+    //влево
     if (y > 0 && img[x][y - 1] != v->color && img[x][y - 1] != 1L) {
         defineTop(img, x, y - 1, v);
     }
+    //вправо
     if (y < W - 1 && img[x][y + 1] != v->color && img[x][y + 1] != 1) {
         defineTop(img, x, y + 1, v);
     }
 }
 
-// удаление ненастощих соседей
+// удаление ненастоящих соседей
 void isNeighbours(uc** M, int x, int y, vertex* v, int maxi) {
     int mid = 0; // is there neighbour between x and y
 

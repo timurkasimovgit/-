@@ -44,10 +44,10 @@ void reader(FILE* in, uc** canvas, int padding) {
             tempGreen = getc(in);
             tempRed = getc(in);
             if (tempBlue == tempGreen && tempGreen == tempRed && tempRed == 255) {
-                canvas[i][j] = 0;
+                canvas[i][j] = 0;//белый пиксель
             }
             else {
-                canvas[i][j] = 1;
+                canvas[i][j] = 1;//черный пиксель
             }
         }
         //         пропускаем последний байт в строке
@@ -88,10 +88,13 @@ void writer(FILE* out, uc** img, int padding) {
             {0,  255, 255},
             {206, 255, 29}
     };
+    int multy = H * W;
+    int del = H * W / 40;
+
     for (int i = H - 1; i >= 0; --i) {
         for (int j = 0; j < W; ++j) {
-            if (H * W > 40 && (H - i) * j % (H * W / 40) == 0) {
-                printf("\r%d%%", 60 + (int)((40 * (H - i) * j) / (H * W)));
+            if (multy > 40 && (H - i) * j % del == 0) {
+                printf("\r%d%%", 60 + (int)((40 * (H - i) * j) / multy));
             }
             int c = img[i][j];
             if (c == 0) {
