@@ -51,50 +51,34 @@ void help() {
         "|------------------------------------------------------------------|\n");
 }
 
-void findNeighbours(uc** canvas, uc** M, int param) {
-    // param = 1 - horizontal
-    // param = 2 - vertical
-
+void findNeighboursHoriz(uc** canvas, uc** M)
+{
     int size1, size2;
-    if (param == 1) {
-        size1 = H;
-        size2 = W;
-    }
-    if (param == 2) {
-        size1 = W;
-        size2 = H;
-    }
+    size1 = H;
+    size2 = W;
     int cur;
-    for (int i = 0; i < size1; ++i) {
-        if (param == 1) {
-            cur = canvas[i][0];
-        }
-        if (param == 2) {
-            cur = canvas[0][i];
-        }
+    //запускаем цикл для прохода в ширину/глубину
+    for (int i = 0; i < size1; ++i)
+    {
+        cur = canvas[i][0];
         int t = 0;
-        while (t < size2 && cur == 1) {
-            if (param == 1) {
-                cur = canvas[i][t];
-            }
-            if (param == 2) {
-                cur = canvas[t][i];
-            }
+        //если в ширину, то идем вниз и ищем границу
+        while (t < size2 && cur == 1)
+        {
+            cur = canvas[i][t];
             t++;
         }
+        //в cur лежит черный цвет
+        //когда нашли границу, то идем дальше и ищем, когда граница закончится
         for (int j = t; j < size2; ++j) {
             uc elem;
-            if (param == 1) {
-                elem = canvas[i][j];
-            }
-            if (param == 2) {
-                elem = canvas[j][i];
-            }
+            elem = canvas[i][j];
 
             if (elem != cur && elem != 1) {
                 //                && canvas[i][j - 1] != 1
                 int k = 0;
                 int isConnect = 0;
+                //заполняем весь столбец связью
                 while (M[cur][k] != 0) {
                     if (M[cur][k] == elem) {
                         isConnect = 1;
@@ -107,6 +91,63 @@ void findNeighbours(uc** canvas, uc** M, int param) {
 
                 k = 0;
                 isConnect = 0;
+
+                while (M[elem][k] != 0) {
+                    if (M[elem][k] == cur) {
+                        isConnect = 1;
+                    }
+                    k++;
+                }
+                if (isConnect == 0) {
+                    M[elem][k] = cur;
+                }
+                cur = elem;
+            }
+        }
+    }
+}
+void findNeighboursVertic(uc** canvas, uc** M)
+{
+    int size1, size2;
+    size1 = W;
+    size2 = H;
+    int cur;
+    //запускаем цикл для прохода в ширину/глубину
+    for (int i = 0; i < size1; ++i)
+    {
+        cur = canvas[0][i];
+
+        int t = 0;
+        //если в ширину, то идем вниз и ищем границу
+        while (t < size2 && cur == 1)
+        {
+            cur = canvas[t][i];
+            t++;
+        }
+        //в cur лежит черный цвет
+        //когда нашли границу, то идем дальше и ищем, когда граница закончится
+        for (int j = t; j < size2; ++j) {
+            uc elem;
+            elem = canvas[j][i];
+
+            if (elem != cur && elem != 1) {
+                //                && canvas[i][j - 1] != 1
+                int k = 0;
+                int isConnect = 0;
+                //заполняем весь столбец связью
+                while (M[cur][k] != 0) {
+                    if (M[cur][k] == elem) {
+                        isConnect = 1;
+                    }
+                    k++;
+                }
+                if (isConnect == 0) {
+                    M[cur][k] = elem;
+                }
+
+                k = 0;
+                isConnect = 0;
+
                 while (M[elem][k] != 0) {
                     if (M[elem][k] == cur) {
                         isConnect = 1;
