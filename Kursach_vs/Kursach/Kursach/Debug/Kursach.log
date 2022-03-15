@@ -1,2 +1,6 @@
 ﻿  Kursach.cpp
-  Kursach.vcxproj -> C:\Users\timur\source\repos\Kursach\Debug\Kursach.exe
+C:\Users\skrip\Downloads\Telegram Desktop\Kursach_vs\Kursach\Kursach\graphs.h(11,1): warning C4010: однострочный комментарий содержит знак объединения строк
+C:\Users\skrip\Downloads\Telegram Desktop\Kursach_vs\Kursach\Kursach\graphs.h(12,1): warning C4010: однострочный комментарий содержит знак объединения строк
+C:\Users\skrip\Downloads\Telegram Desktop\Kursach_vs\Kursach\Kursach\graphs.h(13,1): warning C4010: однострочный комментарий содержит знак объединения строк
+C:\Users\skrip\Downloads\Telegram Desktop\Kursach_vs\Kursach\Kursach\graphs.h(25,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  Kursach.vcxproj -> C:\Users\skrip\Downloads\Telegram Desktop\Kursach_vs\Kursach\Debug\Kursach.exe
