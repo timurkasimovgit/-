@@ -181,6 +181,7 @@ int coloring(int vQuan, int* colors, uc** M, int v) {
         }
         cur = !cur;
         curColor++;
+        if (curColor > 4) return -1;
     }
 
     for (int i = 0; i < vQuan; ++i) {
