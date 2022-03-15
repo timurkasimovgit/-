@@ -91,6 +91,17 @@ void writer(FILE* out, uc** img, int padding) {
     int multy = H * W;
     int del = H * W / 40;
 
+    __asm
+    {
+        mov eax, H//eax=H
+        mov ebx, W//eax=W
+        mul ebx//eax*=ebx
+        mov multy, eax//multy=eax
+        mov ebx, 40//ebx=40
+        div ebx//eax/=ebx
+        mov del, eax//del=eax
+    }
+
     for (int i = H - 1; i >= 0; --i) {
         for (int j = 0; j < W; ++j) {
             if (multy > 40 && (H - i) * j % del == 0) {
